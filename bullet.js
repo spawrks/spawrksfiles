@@ -6,7 +6,7 @@
 d3.bullet = function() {
   var orient = "left", // TODO top & bottom
       reverse = false,
-      duration = 0,
+      duration = 500,
       ranges = bulletRanges,
       markers = bulletMarkers,
       measures = bulletMeasures,
