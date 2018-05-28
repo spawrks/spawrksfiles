@@ -43,10 +43,11 @@ d3.bullet = function() {
       var range = g.selectAll("rect.range")
           .data(rangez);
 
+      var rangeHeight = height;
       range.enter().append("rect")
           .attr("class", function(d, i) { return "range s" + i; })
           .attr("width", w0)
-          .attr("height", height)
+          .attr("height", rangeHeight)
           .attr("x", reverse ? x0 : 0)
         .transition()
           .duration(duration)
@@ -57,18 +58,20 @@ d3.bullet = function() {
           .duration(duration)
           .attr("x", reverse ? x1 : 0)
           .attr("width", w1)
-          .attr("height", height);
+          .attr("height", rangeHeight)
 
       // Update the measure rects.
       var measure = g.selectAll("rect.measure")
           .data(measurez);
 
+      var measureRectHeight = height / 3; // draw in the middle
+
       measure.enter().append("rect")
           .attr("class", function(d, i) { return "measure s" + i; })
           .attr("width", w0)
-          .attr("height", height / 3)
+          .attr("height", measureRectHeight)
           .attr("x", reverse ? x0 : 0)
-          .attr("y", height / 3)
+          .attr("y", measureRectHeight)
         .transition()
           .duration(duration)
           .attr("width", w1)
@@ -77,14 +80,15 @@ d3.bullet = function() {
       measure.transition()
           .duration(duration)
           .attr("width", w1)
-          .attr("height", height / 3)
+          .attr("height", measureRectHeight)
           .attr("x", reverse ? x1 : 0)
-          .attr("y", height / 3);
+          .attr("y", measureRectHeight);
 
       // Update the marker lines.
       var marker = g.selectAll("line.marker")
           .data(markerz);
 
+      // This draws the markers
       marker.enter().append("line")
           .attr("class", "marker")
           .attr("x1", x0)
